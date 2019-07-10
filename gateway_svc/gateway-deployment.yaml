@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: gateway-container
-        image: dpkorcle/#{BUILD_NUMBER}#
+        image: dpkorcle/gateway:#{BUILD_NUMBER}#
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
