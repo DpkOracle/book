@@ -1,6 +1,6 @@
 ﻿#Start Minikube
 
-minikube delete
+minikube delete -f
 
 minikube start --vm-driver hyperv --hyperv-virtual-switch "Primary Virtual Switch"
 
@@ -60,7 +60,25 @@ minikube service gateway-service --url
 curl $(minikube service gateway-service --url)/api/v1/book/1 -H "authorization: ASUPERSECUREAUTTHTOKEN"
 
 
+# Prom grafane
 
+#Install HELM
+choco install kubernetes-helm -y
+
+#Install Thriller
+helm init
+
+#Verify 
+helm version
+
+#Update the Repo
+helm repo update
+
+#Install Service Monitor
+helm install stable/prometheus-operator --name prometheus-operator --namespace monitoring
+
+#Port forward to view on prometheus dashboard
+kubectl port-forward -n monitoring prometheus-prometheus-operator-prometheus-0 9090
 
 
 
