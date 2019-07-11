@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: books-container
-        image: dpkorcle/books:[0-9]
+        image: dpkorcle/books:var
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
