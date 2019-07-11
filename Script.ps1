@@ -1,6 +1,11 @@
 ﻿#Start Minikube
 
-minikube delete -f
+minikube delete
+
+minikube status
+
+minikube update-context
+
 
 minikube start --vm-driver hyperv --hyperv-virtual-switch "Primary Virtual Switch"
 
@@ -21,6 +26,11 @@ docker build ./gateway_svc -t gateway
 kubectl apply -f gateway_svc/gateway-deployment.yaml
 
 kubectl apply -f gateway_svc/gateway-service.yaml
+
+kubectl delete -f gateway_svc/gateway-deployment.yaml
+
+
+kubectl delete deployment gateway-deployment   
 
 
 # auth_svc Service
@@ -54,7 +64,11 @@ kubectl get services -o=custom-columns=NAME:.metadata.name,IP:.spec.clusterIP
 minikube status
 minikube service gateway-service --url
 
-#http://192.168.1.101:30479/api/v1/hey
+minikube dashboard
+
+kubectl get svc --all-namespaces
+
+#http://192.168.1.103:30479/api/v1/hey
 
 # Test
 curl $(minikube service gateway-service --url)/api/v1/book/1 -H "authorization: ASUPERSECUREAUTTHTOKEN"
@@ -76,6 +90,8 @@ helm repo update
 
 #Install Service Monitor
 helm install stable/prometheus-operator --name prometheus-operator --namespace monitoring
+
+kubectl get pods  -n monitoring
 
 #Port forward to view on prometheus dashboard
 kubectl port-forward -n monitoring prometheus-prometheus-operator-prometheus-0 9090
