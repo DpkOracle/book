@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth-container
-        image: dpkorcle/auth:var
+        image: dpkorcle/auth:#{BUILD_NUMBER}#
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
